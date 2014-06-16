@@ -21,4 +21,4 @@
 *.app
 
 *.user
-./build/
+/build/*
