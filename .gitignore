@@ -19,6 +19,9 @@
 *.exe
 *.out
 *.app
+<<<<<<< HEAD
 
 *.user
 /build/*
+=======
+>>>>>>> 1a72fecb56728fa43f6f95a89b23c334c777678d
