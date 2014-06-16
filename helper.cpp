@@ -38,14 +38,38 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#include "helper.h"
+#include "maze.h"
+#include <QPainter>
+#include <QPaintEvent>
+#include <QWidget>
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
+Helper::Helper()
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
+ //   QLinearGradient gradient(QPointF(50, -20), QPointF(80, 20));
+ //   gradient.setColorAt(0.0, Qt::white);
+ //   gradient.setColorAt(1.0, QColor(0xa6, 0xce, 0x39));
+
+    background = QBrush(QColor(64, 32, 64));
+    //circleBrush = QBrush(gradient);
+ //   circlePen = QPen(Qt::black);
+ //   circlePen.setWidth(1);
+
+}
+
+void Helper::paint(QPainter *painter, QPaintEvent *event)
+{
+    painter->fillRect(event->rect(), background);
+ //   painter->translate(4, 4);
+
+ //   painter->save();
+
+    if ((event->rect().width()>20) && (event->rect().height()>20)){
+    mazeGenerator    maze( event->rect().width()/4 , event->rect().height()/4 );
+    maze.carve();
+    maze.solveIt();
+    maze.draw(painter);
+    }
+//    painter->restore();
+
 }

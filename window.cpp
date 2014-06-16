@@ -38,14 +38,30 @@
 **
 ****************************************************************************/
 
+#include "glwidget.h"
+#include "widget.h"
 #include "window.h"
 
-#include <QApplication>
+#include <QGridLayout>
+#include <QLabel>
+#include <QTimer>
 
-int main(int argc, char *argv[])
+Window::Window()
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
+    setWindowTitle(tr("maze generator"));
+
+    Widget *native = new Widget(&helper, this);
+
+    QGridLayout *layout = new QGridLayout;
+    layout->addWidget(native);
+//    layout->addWidget(openGL, 0, 1);
+
+
+    setLayout(layout);
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), native, SLOT(animate()));
+//    connect(timer, SIGNAL(timeout()), openGL, SLOT(animate()));
+    timer->start(500);
 }
+

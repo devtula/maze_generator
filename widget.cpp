@@ -38,14 +38,30 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#include "widget.h"
+#include "helper.h"
 
-#include <QApplication>
+#include <QPainter>
+#include <QTimer>
 
-int main(int argc, char *argv[])
+Widget::Widget(Helper *helper, QWidget *parent)
+    : QWidget(parent), helper(helper)
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
+
+    this->setMinimumSize(320, 240);
+    //setBaseSize(320, 240);
+}
+
+void Widget::animate()
+{
+    repaint();
+}
+
+void Widget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter;
+    painter.begin(this);
+ //   painter.setRenderHint(QPainter::Antialiasing);
+    helper->paint(&painter, event);
+    painter.end();
 }

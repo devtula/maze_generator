@@ -38,14 +38,28 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#ifndef HELPER_H
+#define HELPER_H
 
-#include <QApplication>
+#include <QBrush>
+#include <QFont>
+#include <QPen>
+#include <QWidget>
 
-int main(int argc, char *argv[])
+class Helper
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
-}
+public:
+    Helper();
+
+public:
+    void paint(QPainter *painter, QPaintEvent *event);
+
+private:
+    QBrush background;
+    QBrush circleBrush;
+    QFont textFont;
+    QPen circlePen;
+    QPen textPen;
+};
+
+#endif

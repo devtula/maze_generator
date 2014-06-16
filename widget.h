@@ -38,14 +38,29 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#ifndef WIDGET_H
+#define WIDGET_H
 
-#include <QApplication>
+#include <QWidget>
 
-int main(int argc, char *argv[])
+class Helper;
+
+class Widget : public QWidget
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
-}
+    Q_OBJECT
+
+public:
+    Widget(Helper *helper, QWidget *parent);
+
+public slots:
+    void animate();
+
+protected:
+    void paintEvent(QPaintEvent *event);
+
+private:
+    Helper *helper;
+
+};
+
+#endif

@@ -38,14 +38,29 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#ifndef GLWIDGET_H
+#define GLWIDGET_H
 
-#include <QApplication>
+#include <QGLWidget>
 
-int main(int argc, char *argv[])
+class Helper;
+
+class GLWidget : public QGLWidget
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
-}
+    Q_OBJECT
+
+public:
+    GLWidget(Helper *helper, QWidget *parent);
+
+public slots:
+    void animate();
+
+protected:
+    void paintEvent(QPaintEvent *event);
+
+private:
+    Helper *helper;
+    int elapsed;
+};
+
+#endif

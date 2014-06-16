@@ -38,14 +38,30 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#include "glwidget.h"
+#include "helper.h"
 
-#include <QApplication>
+#include <QTimer>
 
-int main(int argc, char *argv[])
+GLWidget::GLWidget(Helper *helper, QWidget *parent)
+    : QGLWidget(QGLFormat(QGL::SampleBuffers), parent), helper(helper)
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
+    elapsed = 0;
+    setFixedSize(800, 800);
+    setAutoFillBackground(false);
+}
+
+void GLWidget::animate()
+{
+
+    repaint();
+}
+
+void GLWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter;
+    painter.begin(this);
+  //  painter.setRenderHint(QPainter::Antialiasing);
+    helper->paint(&painter, event);
+    painter.end();
 }

@@ -38,14 +38,22 @@
 **
 ****************************************************************************/
 
-#include "window.h"
+#ifndef WINDOW_H
+#define WINDOW_H
 
-#include <QApplication>
+#include "helper.h"
 
-int main(int argc, char *argv[])
+#include <QWidget>
+
+class Window : public QWidget
 {
-    QApplication app(argc, argv);
-    Window window;
-    window.show();
-    return app.exec();
-}
+    Q_OBJECT
+
+public:
+    Window();
+
+private:
+    Helper helper;
+};
+
+#endif

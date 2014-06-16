@@ -1,22 +1,25 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2013-12-23T10:11:50
-#
-#-------------------------------------------------
+QT          += opengl widgets
 
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = maze_generator
-TEMPLATE = app
-
-
-SOURCES += main.cpp\
-        mainwindow.cpp \
+HEADERS     = glwidget.h \
+              helper.h \
+              widget.h \
+              window.h \
+    maze.h
+SOURCES     = glwidget.cpp \
+              helper.cpp \
+              main.cpp \
+              widget.cpp \
+              window.cpp \
     maze.cpp
 
-HEADERS  += mainwindow.h \
-    maze.h
 
-FORMS    += mainwindow.ui
+simulator: warning(This example might not fully work on Simulator platform)
+
+
+#======== Translation ===============
+TRANSLATIONS    = app_en.ts
+CODECFORTR      = UTF-8
+
+CONFIG (debug, debug|release) {
+    CONFIG       += console
+}
